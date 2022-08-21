@@ -4,10 +4,13 @@ import cinema.dao.MovieDao;
 import cinema.model.Movie;
 import cinema.service.MovieService;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImpl implements MovieService {
+    public static final Logger logger = LogManager.getLogger(MovieServiceImpl.class);
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -16,7 +19,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        return movieDao.add(movie);
+        Movie createdMovie = movieDao.add(movie);
+        logger.info("A new movie has been added. Params:{movieId:{}, title:{}}",
+                createdMovie.getId(), createdMovie.getTitle());
+        return createdMovie;
     }
 
     @Override

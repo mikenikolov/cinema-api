@@ -7,10 +7,13 @@ import cinema.service.RoleService;
 import cinema.service.ShoppingCartService;
 import cinema.service.UserService;
 import java.util.Set;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+    public static final Logger logger = LogManager.getLogger(AuthenticationServiceImpl.class);
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
     private final RoleService roleService;
@@ -31,6 +34,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRoles(Set.of(roleService.getByName(Role.RoleName.USER.name())));
         userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
+        logger.info("User was registered. Params: {userId:{}, email:{}, roles:{}}",
+                user.getId(), user.getEmail(), user.getRoles());
         return user;
     }
 }

@@ -7,10 +7,13 @@ import cinema.model.ShoppingCart;
 import cinema.model.Ticket;
 import cinema.model.User;
 import cinema.service.ShoppingCartService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
+    public static final Logger logger = LogManager.getLogger(ShoppingCartServiceImpl.class);
     private final ShoppingCartDao shoppingCartDao;
     private final TicketDao ticketDao;
 
@@ -28,6 +31,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ticketDao.add(ticket);
         shoppingCart.getTickets().add(ticket);
         shoppingCartDao.update(shoppingCart);
+        logger.info("A movie ticket has been created and added to the user's cart. "
+                        + "Params:{userId:{}, ticketId:{}, movieSessionId:{}}",
+                movieSession.getMovie().getId(), ticket.getId(), user.getId());
     }
 
     @Override

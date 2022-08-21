@@ -80,8 +80,9 @@ public class User {
     @Override
     public String toString() {
         return "User{"
-            + "id=" + id
-            + ", email='" + email + '\''
-            + '}';
+                + "id=" + id
+                + ", email='" + email + '\''
+                + ", roles=" + roles
+                + '}';
     }
 }

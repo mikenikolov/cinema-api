@@ -8,10 +8,13 @@ import cinema.service.OrderService;
 import cinema.service.ShoppingCartService;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    public static final Logger logger = LogManager.getLogger(OrderServiceImpl.class);
     private final OrderDao orderDao;
     private final ShoppingCartService shoppingCartService;
 
@@ -28,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(shoppingCart.getUser());
         orderDao.add(order);
         shoppingCartService.clear(shoppingCart);
+        logger.info("User's order has been completed. Params:{userId:{}, orderId:{}}",
+                shoppingCart.getUser().getId(), order.getId());
         return order;
     }
 
