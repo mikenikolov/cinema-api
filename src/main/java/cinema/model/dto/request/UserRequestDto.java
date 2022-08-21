@@ -3,7 +3,9 @@ package cinema.model.dto.request;
 import cinema.annotation.FieldsValueMatch;
 import cinema.annotation.ValidEmail;
 import javax.validation.constraints.Size;
+import lombok.Getter;
 
+@Getter
 @FieldsValueMatch(
         field = "password",
         fieldMatch = "repeatPassword",
@@ -15,16 +17,4 @@ public class UserRequestDto {
     @Size(min = 8, max = 40)
     private String password;
     private String repeatPassword;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
 }
