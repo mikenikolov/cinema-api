@@ -6,8 +6,10 @@ import cinema.model.dto.response.UserResponseDto;
 import cinema.service.AuthenticationService;
 import cinema.service.mapper.ResponseDtoMapper;
 import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,6 +25,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(@RequestBody @Valid UserRequestDto requestDto) {
         User user = authService.register(requestDto.getEmail(), requestDto.getPassword());
         return userDtoResponseMapper.mapToDto(user);
