@@ -4,7 +4,7 @@ Cinema API - a REST API with which you can conveniently control the main functio
 
 **You can test this already deployed project at the following link:**
 
-❗ Before testing read [how to use](#❓-How-to-use) this API
+❗ Before testing read [how to use](#-how-to-use) this API
 
 https://modern-cinema-api.herokuapp.com/
 
@@ -31,6 +31,7 @@ https://modern-cinema-api.herokuapp.com/
 - Hibernate 5.4.27
 - Spring Framework 5.2.2 (Web, Security)
 - Log4j 2.18.0
+- Lombok 1.18.24
 - JSON
 
 ## ❓ How to use
