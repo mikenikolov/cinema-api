@@ -1,6 +1,5 @@
 package cinema.model;
 
-import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,29 +31,10 @@ public class User {
     private Set<Role> roles;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email)
-                && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, password, roles);
-    }
-
-    @Override
     public String toString() {
         return "User{"
                 + "id=" + id
-                + ", email='" + email + '\''
-                + ", roles=" + roles
+                + ", email='" + email
                 + '}';
     }
 }

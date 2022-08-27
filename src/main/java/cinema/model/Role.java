@@ -1,5 +1,6 @@
 package cinema.model;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,8 +15,8 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@Entity
 @ToString
+@Entity
 @Table(name = "roles")
 public class Role {
     @Id
@@ -28,5 +29,22 @@ public class Role {
     @ToString
     public enum RoleName {
         ADMIN, USER
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) && roleName == role.roleName;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roleName);
     }
 }
