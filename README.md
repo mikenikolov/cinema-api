@@ -7,8 +7,6 @@ the right "About" section of the repository**
 
 ❗ Before testing read [how to use](#-how-to-use) this API
 
-https://modern-cinema-api.herokuapp.com/
-
 ## 🎯 Features
 - Registration / Authentication
 - Roles (Admin, User)
