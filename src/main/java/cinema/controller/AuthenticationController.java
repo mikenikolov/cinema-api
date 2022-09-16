@@ -9,7 +9,6 @@ import cinema.model.dto.response.UserResponseDto;
 import cinema.security.jwt.JwtProvider;
 import cinema.service.AuthenticationService;
 import cinema.service.mapper.ResponseDtoMapper;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService authService;
     private final ResponseDtoMapper<UserResponseDto, User> userDtoResponseMapper;
-
     private final JwtProvider jwtProvider;
 
     public AuthenticationController(AuthenticationService authService,
@@ -43,9 +41,7 @@ public class AuthenticationController {
     public JwtResponseDto login(@RequestBody @Valid UserLoginRequestDto loginDto)
             throws AuthenticationException {
         User user = authService.login(loginDto.getEmail(), loginDto.getPassword());
-        String generatedJwt = jwtProvider.generateJwt(user.getEmail(), user.getRoles().stream()
-                .map(role -> role.getRoleName().name())
-                .collect(Collectors.toList()));
+        String generatedJwt = jwtProvider.generateJwt(user.getEmail());
         return jwtProvider.generateResponseEntity(generatedJwt);
     }
 }
