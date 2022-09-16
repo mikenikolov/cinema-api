@@ -29,8 +29,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
         AuthExceptionResponseDto exceptionResponse =
-                new AuthExceptionResponseDto(LocalDateTime.now(), status.value(), errors);
-        return new ResponseEntity<>(exceptionResponse, headers, HttpStatus.UNAUTHORIZED);
+                new AuthExceptionResponseDto(LocalDateTime.now(),
+                        HttpStatus.BAD_REQUEST.value(), errors);
+        return new ResponseEntity<>(exceptionResponse, headers, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AuthenticationException.class)
