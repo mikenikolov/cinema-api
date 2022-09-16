@@ -2,11 +2,10 @@
 
 Cinema API - a stateless REST API with which you can conveniently control the main functions of the cinema.
 
-**You can test this already deployed project at the following link:**
+**You can test this already deployed project by following the link in
+the right "About" section of the repository**
 
 ❗ Before testing read [how to use](#-how-to-use) this API
-
-https://modern-cinema-api.herokuapp.com/
 
 ## 🎯 Features
 - Registration / Authentication

@@ -12,7 +12,6 @@ import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,12 +39,10 @@ public class JwtProvider {
         secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-    public String generateJwt(String username, List<String> roles) {
+    public String generateJwt(String username) {
         Date currentDate = new Date();
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put("roles", roles);
         return Jwts.builder()
-                .setClaims(claims)
+                .setSubject(username)
                 .setExpiration(new Date(currentDate.getTime() + validityTime))
                 .setIssuedAt(currentDate)
                 .signWith(secretKey)
