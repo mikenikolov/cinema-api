@@ -2,9 +2,6 @@
 
 Cinema API - a stateless REST API with which you can conveniently control the main functions of the cinema.
 
-**You can test this already deployed project by following the link in
-the right "About" section of the repository**
-
 ❗ Before testing read [how to use](#-how-to-use) this API
 
 ## 🎯 Features
@@ -47,10 +44,10 @@ As a step for authentication, the application uses
 [Token Authentication](https://swagger.io/docs/specification/authentication/bearer-authentication/).
 As a token, the application uses [JWT](https://jwt.io/introduction).
 You can get JWT token following `/login` endpoint with `POST` method and request body 
-with **valid** credentials: `{"email", "password"}`. In response you will get [JSON](https://en.wikipedia.org/wiki/JSON) 
-object: `{"owner", "issuedDate", "expirationDate", "token"}`.
+with **valid** credentials: `{"email", "password"}`. In response, you will get [JSON](https://en.wikipedia.org/wiki/JSON) 
+object: `{"owner", "issued_date", "expiration_date", "token"}`.
 
-`expirationDate` - the date after which the token is invalid and cannot be used again
+`expiration_date` - the date after which the token is invalid and cannot be used again
 
 `token` - **our token** which we need to store
 
@@ -58,7 +55,7 @@ The user must send this `token` in the `Authorization` header when making reques
 
 Example: `Authorization: Bearer <token>`.
 
-*JWT validity time on [already deployed project](#-cinema-api-) = 30 mins*
+*JWT validity time by default is 30 minutes*
 
 **🔧️ Using endpoints**
 
@@ -70,7 +67,7 @@ and then - send the request. After this you will receive
 a JSON object with data or no-body response with [status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
 
-❗ Access to endpoints depends on the roles of the logged in user. There is two roles: `Admin` and `User`
+❗ Access to endpoints depends on the roles of the logged-in user. There is two roles: `Admin` and `User`
 
 ❗ `/register` endpoint creating users ONLY with `User` role
 
@@ -84,26 +81,27 @@ Credentials for testing already deployed project:
 
 ## 🌐 Endpoints
 
-| Method   | Role | URL                                                              | Request body                            | Description                                                                          |
-|----------|:----:|------------------------------------------------------------------|-----------------------------------------|--------------------------------------------------------------------------------------|
-| `POST`   |  -   | `/register`                                                      | `{"email","password","repeatPassword"}` | Register a new user                                                                  |
-| `POST`   |  -   | `/login`                                                         | `{"email","password"}`                  | Get a JWT                                                                            |
-| `GET`    |  A   | `/by-email?email={email}`                                        | None                                    | Get a user by email                                                                  |
-| `POST`   |  A   | `/cinema-halls`                                                  | `{"capacity","description"}`            | Create a new cinema hall                                                             |
-| `GET`    | A U  | `/cinema-halls`                                                  | None                                    | Get all cinema halls                                                                 |
-| `POST`   |  A   | `/movies`                                                        | `{"title","description"}`               | Create a new movie                                                                   |
-| `GET`    | A U  | `/movies`                                                        | None                                    | Get all movies                                                                       |
-| `GET`    | A U  | `/movie-sessions/available?movieId={movieId}&date={dd.MM.yyyy}`  | None                                    | Get all movie sessions for a specific movie and day                                  |
-| `PUT`    |  A   | `/movie-sessions/{movieSessionId}`                               | `{"movieId","cinemaHallId","showTime"}` | Update a specific movie session (`showTime` pattern must be `yyyy-MM-dd'T'HH:mm:ss`) |
-| `DELETE` |  A   | `/movie-sessions/{movieSessionId}`                               | None                                    | Delete a movie session                                                               |
-| `PUT`    |  U   | `/shopping-carts/movie-sessions?movieSessionId={movieSessionId}` | None                                    | Put a ticket in the cart                                                             |
-| `GET`    |  U   | `/shopping-carts/by-user`                                        | None                                    | Get all tickets in the cart                                                          |
-| `PUT`    |  U   | `/orders/complete`                                               | None                                    | Complete the order                                                                   |
-| `GET`    |  U   | `/orders`                                                        | None                                    | Get all completed orders                                                             |
+| Method   | Role | URL                                                                | Request body                                | Description                                                                         |
+|----------|:----:|--------------------------------------------------------------------|---------------------------------------------|-------------------------------------------------------------------------------------|
+| `POST`   |  -   | `/register`                                                        | `{"email","password","repeat_password"}`    | Register a new user                                                                 |
+| `POST`   |  -   | `/login`                                                           | `{"email","password"}`                      | Get a JWT                                                                           |
+| `GET`    |  A   | `/by-email?email={email}`                                          | None                                        | Get a user by email                                                                 |
+| `POST`   |  A   | `/cinema-halls`                                                    | `{"capacity","description"}`                | Create a new cinema hall                                                            |
+| `GET`    | A U  | `/cinema-halls`                                                    | None                                        | Get all cinema halls                                                                |
+| `POST`   |  A   | `/movies`                                                          | `{"title","description"}`                   | Create a new movie                                                                  |
+| `GET`    | A U  | `/movies`                                                          | None                                        | Get all movies                                                                      |
+| `POST`   |  A   | `/movie-sessions`                                                  | `{"movie_id","cinema_hall_id","show_time"}` | Create a new movie session                                                          |
+| `GET`    | A U  | `/movie-sessions/available?movieId={movie_id}&date={dd.MM.yyyy}`   | None                                        | Get all movie sessions for a specific movie and day                                 |
+| `PUT`    |  A   | `/movie-sessions/{movie_session_id}`                               | `{"movie_id","cinema_hall_id","show_time"}` | Update a specific movie session (`show_time` pattern must be `yyyy-MM-ddTHH:mm:ss`) |
+| `DELETE` |  A   | `/movie-sessions/{movie_session_id}`                               | None                                        | Delete a movie session                                                              |
+| `PUT`    |  U   | `/shopping-carts/movie-sessions?movieSessionId={movie_session_id}` | None                                        | Put a ticket in the cart                                                            |
+| `GET`    |  U   | `/shopping-carts/by-user`                                          | None                                        | Get all tickets in the cart                                                         |
+| `PUT`    |  U   | `/orders/complete`                                                 | None                                        | Complete the order                                                                  |
+| `GET`    |  U   | `/orders`                                                          | None                                        | Get all completed orders                                                            |
 
 ## ⚙ How to setup?
 1. Install PostgreSQL, Tomcat, Java, Maven, Git
-2. Clone a newest version of the project
+2. Clone the newest version of the project
 3. Configure a Tomcat and PostgreSQL
 4. Change database properties in `src/main/resources/db.properties`
    to the actual properties for your database
