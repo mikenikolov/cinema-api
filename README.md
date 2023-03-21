@@ -105,18 +105,13 @@ Credentials for testing already deployed project:
 3. Configure a Tomcat and PostgreSQL
 4. Change database properties in `src/main/resources/db.properties`
    to the actual properties for your database
-5. Change credentials of initial users in `src/main/resources/credentials.properties`
+5. [Optional] Change credentials of initial users in `src/main/resources/credentials.properties`
 
    ❗ These properties are for creating default admin and user which are created when you start the application
-6. Change the value of `jwt.token.validityTime` (in milliseconds) in `src/main/resources/security.properties`
+6. [Optional] Change the value of `jwt.token.validityTime` (in milliseconds) in `src/main/resources/security.properties`
 
-   ❗ This will be validity time of the JWT token
+   ❗ This will be validity time of the JWT token. By default, it's 30 minutes.
 
 7. Start a configured Tomcat
 
 After these steps you can start using the REST application ✨
-
-## 🤵 Author
-_Mykhailo Nikolov_
-
-https://github.com/mikenikolov
